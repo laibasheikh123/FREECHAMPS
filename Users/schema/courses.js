@@ -11,10 +11,11 @@ const courseSchema = new Schema({
     isPublished: { type: Boolean, default: true },
     trainingLevel: { type: String, required: true },
     isVideoMedium: { type: String, required: true },
+    playlist: { type: [String], default: [] },
     created_at: { type: Date, default: Date.now },
 });
 
 
 
-const Course = model ('course', courseSchema) 
+const Course = model('course', courseSchema)
 module.exports = Course;

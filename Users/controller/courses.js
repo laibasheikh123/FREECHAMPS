@@ -98,6 +98,31 @@ const getCoursesByDuration = async (req, res) => {
 };
 
 
+const addVideos = async (req, res) => {
+    const { _id, videoURL } = req.body;
+
+    try {
+        // Course ID ke basis par course dhoondhein
+        const course = await Course.findById(_id);
+
+        if (!course) {
+            return res.status(404).json({ message: 'Course not found' });
+        }
+
+        // Playlist field ko update karein aur naya videoURL add karein
+        course.playlist.push(videoURL);
+
+        // Updated course ko save karein
+        await course.save();
+
+        res.status(200).json({ message: 'Video playlist mein successfully add hua', course });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+
 
 module.exports = {
     createCourses,
@@ -107,6 +132,7 @@ module.exports = {
     deleteCourseById,
     getPublishedCourses,
     getCoursesByDuration,
+    addVideos
 
 };
 
