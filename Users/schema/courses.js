@@ -13,6 +13,7 @@ const courseSchema = new Schema({
     isVideoMedium: { type: String, required: true },
     playlist: { type: [String], default: [] },
     created_at: { type: Date, default: Date.now },
+    image : { type : String , default : "https://shortcourses.mcmaster.ca/app/uploads/2019/03/bg-ad-creative-1024x896.jpg"}
 });
 
 

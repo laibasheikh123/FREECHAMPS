@@ -4,13 +4,10 @@ const Course = require('../schema/courses');
 const createCourses = async (req, res) => {
     // console.log(req.body)
 
-    const { title, instructor, description, duration, price, trainingLevel, isVideoMedium } = req.body;
+    const { title, instructor, description, duration, price, trainingLevel, isVideoMedium, image } = req.body;
 
     try {
-   
-
-
-        await Course.create({ title, instructor, description, duration, price, trainingLevel, isVideoMedium })
+        await Course.create({ title, instructor, description, duration, price, trainingLevel, isVideoMedium, image })
         res.status(201).json({ message: 'Course created successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });

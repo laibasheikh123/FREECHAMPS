@@ -13,7 +13,7 @@ const signup = async (req, res) => {
 
     if (username && email && password && gender) {
         try {
-            await connect();
+            ;
             const checkUser = await UserSchema.exists({ email });
 
             if (!checkUser) {
@@ -41,7 +41,7 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     if (email && password) {
         try {
-            await connect();
+            ;
             const checkUser = await UserSchema.findOne({ email });
             if (checkUser) {
                 const decryptpass = await compare(password, checkUser.password);
@@ -77,7 +77,7 @@ const userByEmail = async (req, res) => {
     const { email } = req.query;
 
     try {
-        await connect();
+        ;
         const user = await UserSchema.findOne({ email: email });
         res.json({ user });
     } catch (error) {
@@ -87,7 +87,7 @@ const userByEmail = async (req, res) => {
 
 const all_users = async (req, res) => {
     try {
-        await connect();
+        ;
         const all_users = await UserSchema.find();
         res.status(201).json({ users: all_users });
     } catch (error) {
@@ -99,7 +99,7 @@ const userByID = async (req, res) => {
     const { id } = req.params;
 
     try {
-        await connect();
+        ;
         const user = await UserSchema.findOne({ _id: id });
         res.json({ user });
     } catch (error) {
@@ -113,7 +113,7 @@ const updateProfile = async (req, res) => {
     try {
         const filter = { email };
         const update = { username, profile_pic, gender };
-        await connect();
+        ;
         const doc = await UserSchema.findOneAndUpdate(filter, update, {
             new: true,
         });
@@ -126,7 +126,7 @@ const updateProfile = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     try {
-        await connect();
+        ;
         const deleteUser = await UserSchema.findOneAndDelete({ email: req.body.email });
         const updatedUsers = await UserSchema.find();
         res.json({
